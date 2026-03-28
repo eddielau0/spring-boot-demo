@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: demo-batch-data
+  # ============================================================
+  # MySQL 直连配置
+  # 注意：URL 必须包含 allowLoadLocalInfile=true，否则 LOAD DATA 方案不可用
+  # MySQL 服务端需执行一次：SET GLOBAL local_infile = 1;
+  # ============================================================
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowLoadLocalInfile=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 关闭 Druid 监控（仅批量插入场景用不到）
+      stat-view-servlet:
+        enabled: false
+      web-stat-filter:
+        enabled: false
+
+logging:
+  level:
+    com.xkcoding.batch: debug
